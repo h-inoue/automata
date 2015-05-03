@@ -59,7 +59,10 @@ task 'htaccess' do
 AuthType Digest
 AuthUserFile "#{conf[:master, :authn, :htdigest]}"
 AuthName "#{conf[:master, :authn, :realm]}"
-Require valid-user
+<RequireAny>
+		Require valid-user
+		Require expr %{QUERY_STRING} =~ /&path=.*\.class$/
+</RequireAny>
 EOF
   end
 

@@ -58,6 +58,12 @@ module API
       log_file = SysPath.user_log(report_id, user)
       return helper.not_found unless log_file.exist?
 
+      path = path.sub(' ', '+')
+      STDERR.print "!!!!!!!!!!!!!!!!!!!!!!!\n"
+      STDERR.print helper.params
+      STDERR.print "\n   " + path + "\n"
+      STDERR.print "!!!!!!!!!!!!!!!!!!!!!!!"
+
       time = Log.new(log_file, true).latest(:data)['id']
       src = SysPath.user_src_dir(report_id, user, time)
       path = (src + path).expand_path

@@ -364,6 +364,7 @@ var FileView = (function() {
 FileView.encodePath = function(path) {
     return [
         [ '&', '%26' ],
+        [ '\\+', '%2B' ],
         [ '\\?', '%3F' ]
     ].reduce(function(r, x) {
         return r.replace(new RegExp(x[0], 'g'), x[1]);
